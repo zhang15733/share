@@ -41,7 +41,7 @@ function delFile(key, callback){
 	typeof(callback) === 'function' && callback();
 }
 
-function addFile(flist, callback){ console.log(flist);
+function addFile(flist, callback){
 	if (!flist) {return;}
 	var len = Object.keys(fileobj).length;
 	if(len == 0){$(config.container + ' tbody').empty();}
@@ -70,10 +70,10 @@ function add_file_item(key, name){
 		tr.push('<div class="layui-progress-bar" lay-percent="0%"></div>');
 		tr.push('</div></td>');
 		tr.push('<td class="layui-icon-status">');
-		tr.push('<i class="layui-icon layui-fg-gray layui-item-wait" style="font-size: 20px">...</i>');
-		tr.push('<i class="layui-icon layui-fg-gray layui-item-going" style="font-size: 20px;display:none">&#xe63d;</i>');
-		tr.push('<i class="layui-icon layui-fg-green layui-item-success" style="font-size: 20px;display:none">&#xe610;</i>');
-		tr.push('<i class="layui-icon layui-fg-red layui-item-error" style="font-size: 20px;display:none">&#x1007;</i>');
+		tr.push('<i class="layui-icon layui-item-wait" style="font-size: 20px;color: #808080;">...</i>');
+		tr.push('<i class="layui-icon layui-item-going" style="font-size: 20px;display:none;color: #808080;">&#xe63d;</i>');
+		tr.push('<i class="layui-icon layui-item-success" style="font-size: 20px;display:none;color: #5FB878;">&#xe610;</i>');
+		tr.push('<i class="layui-icon layui-item-error" style="font-size: 20px;display:none;color: #FF5722;">&#x1007;</i>');
 		tr.push('</td>');
 		tr.push('<td><a id="del-item-'+key+'" class="layui-btn layui-btn-primary layui-btn-mini del-item" data-itemid="'+key+'"><i class="layui-icon">&#xe640;</i></a></td>');
 		tr.push('</tr>');
@@ -100,12 +100,11 @@ function upload(formobj,key, callback){
 		changeIconCss(key,'error', 1);
 	}
 	var n = 0, timer = setInterval(function(){
-		
 		if(stop){
 			n = n + Math.random()*10|0;
-			if (n>99) {
+			if (n>96) {
 				clearInterval(timer);
-				n = 99;
+				n = 96;
 			}
 			element.progress(key, n+'%');
 		}else{
@@ -166,7 +165,7 @@ var MUpload = function(options){
 			delFile(key, check_data);
 		});
 
-		$(config.container).on('change','#'+_add_file_btn, function(){ console.log('this.files');
+		$(config.container).on('change','#'+_add_file_btn, function(){
 			if(!this.files || this.files.length == 0){
 				return;
 			}
